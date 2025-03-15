@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Алхимическая комната</title>
+    <style>
+        /* Полупрозрачное свечение огня */
+        .fire-glow {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 100, 0, 0.4);
+            border-radius: 50%;
+            box-shadow: 0 0 20px 10px rgba(255, 100, 0, 0.6);
+            pointer-events: none;
+            display: none;
+            z-index: 20;
+        }
+
+        /* Стиль подсказки котла */
+        .tooltip {
+            position: absolute;
+            background-color: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            display: none;
+            z-index: 10;
+        }
+
+        /* Свечение глаз медведя */
+        .bear-eye {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: yellow;
+            border-radius: 50%;
+            box-shadow: 0 0 20px yellow;
+            display: none;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Свечение огня -->
+<div id="fire-glow" class="fire-glow">.</div>
+
+<!-- Подсказка для котла -->
+<div id="tooltip" class="tooltip">Опасное зелье! Не трогать!</div>
+
+<!-- Глаза медведя -->
+<div id="eye1" class="bear-eye" style="left: 225px; top: 585px;"></div>
+<div id="eye2" class="bear-eye" style="left: 262px; top: 582px;"></div>
+
+<!-- Картинка с картой изображений -->
+<img src="https://i.pinimg.com/originals/45/ac/a4/45aca474e41e289acb4793bd9acb3179.jpg" usemap="#image-map" id="alchemy-image">
+
+<map name="image-map">
+    <area alt="book" title="book" href="
+    https://translated.turbopages.org/proxy_u/en-ru.ru.4eb0d993-67d54494-550a8389-74722d776562/https/game8.co/games/Minecraft/archives/377519"
+          coords="932,1075,766,1130,767,1153,852,1195,1039,1131" shape="poly">
+    <area alt="fire" title="fire" coords="717,855,562,892,574,1012,657,1043,689,1045,686,965,720,900" shape="poly" onmouseover="showFireGlow()" onmousemove="moveFireGlow(event)" onmouseout="hideFireGlow()">
+    <area alt="cotel" title="cotel" coords="1125,941,1027,968,1024,1072,1102,1104,1212,1094,1217,999,1202,961,1180,948" shape="poly" onmouseover="showTooltip(event)" onmouseout="hideTooltip()">
+    <area alt="bird" title="bird" coords="1261,1062,1280,1051,1290,1029,1317,1019,1312,995,1283,978,1266,945,1234,943,1214,961,1220,987,1227,1031" shape="poly" onclick="playSound()">
+    <area alt="bear" title="bear" coords="157,392,165,512,301,505,289,378" shape="poly" onclick="glowEyes()">
+</map>
+
+<audio id="bird-sound"
+   src="http://localhost/test.site/wp-content/uploads/2025/03/spokoynoe-ne-nervnoe-karkanie-voronyi.mp3">
+</audio>
+
+<script>
+
+    function showFireGlow() {
+        const fireGlow = document.getElementById("fire-glow");
+        fireGlow.style.display = "block";
+    }
+
+
+    function moveFireGlow(event) {
+        const fireGlow = document.getElementById("fire-glow");
+        fireGlow.style.left = (event.pageX - 50) + "px";
+        fireGlow.style.top = (event.pageY - 50) + "px";
+    }
+
+
+    function hideFireGlow() {
+        const fireGlow = document.getElementById("fire-glow");
+        fireGlow.style.display = "none";
+    }
+
+    // Воспроизведение звука птицы
+    function playSound() {
+        const sound = document.getElementById("bird-sound");
+        sound.play();
+    }
+
+    // Показать предупреждение на котле
+    function showTooltip(event) {
+        const tooltip = document.getElementById("tooltip");
+        tooltip.style.left = event.pageX + 10 + "px";
+        tooltip.style.top = event.pageY + 10 + "px";
+        tooltip.style.display = "block";
+    }
+
+    // Скрыть предупреждение
+    function hideTooltip() {
+        document.getElementById("tooltip").style.display = "none";
+    }
+
+    // Свечение глаз медведя
+    function glowEyes() {
+        const eye1 = document.getElementById("eye1");
+        const eye2 = document.getElementById("eye2");
+        eye1.style.display = "block";
+        eye2.style.display = "block";
+        setTimeout(() => {
+            eye1.style.display = "none";
+            eye2.style.display = "none";
+        }, 1000);
+    }
+</script>
+
+</body>
+</html>
