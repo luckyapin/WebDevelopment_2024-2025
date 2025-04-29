@@ -1,0 +1,92 @@
+{% extends 'parse_note/base.html' %}
+
+{% block title %}Чат с ботом - Mnemos{% endblock %}
+
+{% block content %}
+
+
+<div class="chat">
+    <h2>Чат с ботом</h2>
+    <form action="{% url 'clear_history' %}" method="POST" style="margin-top: 10px;">
+        {% csrf_token %}
+        <button type="submit">Очистить историю</button>
+    </form>
+
+    <div id="chat-box">
+        {% for msg in chat_history %}
+        <div class="message {{ msg.type }}">
+            {{ msg.content|safe }}
+        </div>
+        {% endfor %}
+    </div>
+
+    <form id="chat-form">
+        <input type="text" id="message" placeholder="Введите сообщение" autocomplete="off" required>
+        <button type="submit">Отправить</button>
+    </form>
+</div>
+
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    document.getElementById('chat-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const messageInput = document.getElementById('message');
+        const message = messageInput.value.trim();
+        const chatBox = document.getElementById('chat-box');
+
+        if (message) {
+            // Добавляем сообщение пользователя
+            const userDiv = document.createElement('div');
+            userDiv.className = 'message user';
+            userDiv.textContent = message;
+            chatBox.appendChild(userDiv);
+
+            // Очищаем поле ввода
+            messageInput.value = '';
+
+            // Отправляем запрос
+            fetch("{% url 'send_message' %}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': getCookie('csrftoken'),
+                },
+                body: `message=${encodeURIComponent(message)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Добавляем ответ бота
+                    const botDiv = document.createElement('div');
+                    botDiv.className = 'message bot';
+                    botDiv.innerHTML = data.bot_response;
+                    chatBox.appendChild(botDiv);
+
+                    // Прокрутка к последнему сообщению
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                } else {
+                    alert('Ошибка: ' + (data.error || 'Неизвестная ошибка'));
+                }
+            })
+                    .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка соединения');
+            });
+        }
+    });
+</script>
+{% endblock %}

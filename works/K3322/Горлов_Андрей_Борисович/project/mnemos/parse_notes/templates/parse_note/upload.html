@@ -1,0 +1,17 @@
+{% extends 'parse_note/base.html' %}
+
+{% block title %}Загрузка файла{% endblock %}
+
+{% block content %}
+<main> <!-- Добавьте обертку main для применения стилей -->
+    <h2>Загрузите файл</h2>
+
+    <form method="post" enctype="multipart/form-data" class="upload-form">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+        <button type="submit" class="submit-btn">Загрузить</button>
+    </form>
+</main>
+{% endblock %}

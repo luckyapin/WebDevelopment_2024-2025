@@ -7,6 +7,8 @@ PORT = 65432  # Порт
 
 def solve_quadratic(a, b, c):
     """Решение квадратного уравнения ax^2 + bx + c = 0"""
+    if a == 0:
+        return "Это не квадратное уравнение"
     discriminant = b ** 2 - 4 * a * c
     if discriminant > 0:
         x1 = (-b + math.sqrt(discriminant)) / (2 * a)

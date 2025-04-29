@@ -1,0 +1,17 @@
+{% extends 'parse_note/base.html' %}
+
+{% block title %}Файл загружен{% endblock %}
+
+{% block content %}
+<main class="success-container">
+    <h2>Файл успешно загружен!</h2>
+    <p>Ваш файл готов к просмотру</p>
+    <a href="{{ file_url }}" class="file-link" target="_blank">
+        <svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/>
+            <path d="M14 3v5h5m-6 8H9m6 4H9m2-8H9"/>
+        </svg>
+        Открыть файл
+    </a>
+</main>
+{% endblock %}

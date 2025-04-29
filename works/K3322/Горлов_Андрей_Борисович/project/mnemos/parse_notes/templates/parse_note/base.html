@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Mnemos{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'parse_note/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="/">Mnemos</a></h1>
+        <nav>
+            <a href="/">Главная</a> |
+            <a href="/about/">О проекте</a> |
+            <a href="/upload/">Загрузить файл</a>
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <hr>
+    <footer>
+        <p>© 2025 Mnemos.</p>
+    </footer>
+</body>
+</html>

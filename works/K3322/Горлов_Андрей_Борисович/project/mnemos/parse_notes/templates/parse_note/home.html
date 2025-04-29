@@ -1,0 +1,15 @@
+{% extends 'parse_note/base.html' %}
+
+{% block title %}Главная - Mnemos{% endblock %}
+
+{% block content %}
+<h2>Добро пожаловать в Mnemos!</h2>
+<p>Этот проект создан для загрузки и обработки заметок.</p>
+
+<ul>
+    <li><a class="custom-link" href="/upload/">Загрузить файл</a> - чтобы отправить свою заметку.</li>
+    <li><a class="custom-link" href="/about/">О проекте</a> - узнать подробнее о разработке.</li>
+    <li><a class="custom-link" href="/start_processing/">Обработать все файлы</a> - запустить обработку всех загруженных файлов.</li>
+    <li><a class="custom-link" href="/chat/">Чат</a> - Чат</li>
+</ul>
+{% endblock %}

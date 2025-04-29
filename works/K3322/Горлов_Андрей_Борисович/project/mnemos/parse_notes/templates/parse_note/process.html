@@ -1,0 +1,15 @@
+{% extends 'parse_note/base.html' %}
+
+{% block title %}Обработка файлов - Mnemos{% endblock %}
+
+{% block content %}
+<h2>Идёт обработка файлов...</h2>
+<p>Пожалуйста, подождите. Вы будете автоматически перенаправлены после завершения.</p>
+
+<script>
+    // Через 0.5 секунды отправляем запрос на процессинг
+    setTimeout(function() {
+        window.location.href = "{% url 'process_notes' %}";
+    }, 500); // Можно увеличить таймер до 1000 мс если хочешь
+</script>
+{% endblock %}

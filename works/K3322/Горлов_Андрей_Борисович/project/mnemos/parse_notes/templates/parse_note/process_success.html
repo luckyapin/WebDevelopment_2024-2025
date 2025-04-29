@@ -1,0 +1,16 @@
+{% extends 'parse_note/base.html' %}
+
+{% block title %}Обработка завершена{% endblock %}
+
+{% block content %}
+<h2>Обработка всех файлов завершена!</h2>
+
+<p>Следующие файлы были успешно обработаны:</p>
+<ul>
+    {% for file in files %}
+        <li>{{ file }}</li>
+    {% endfor %}
+</ul>
+
+<a href="/">Вернуться на главную</a>
+{% endblock %}
